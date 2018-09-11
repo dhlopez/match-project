@@ -1,0 +1,97 @@
+
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="profileForm">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label"
+                for="firstname">First Name
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control"
+                    id="firstname"
+                    type="text"
+                    placeholder="Name (optional)"
+                    formControlName="fname" 
+                    [ngClass]=""
+                    />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label"
+                for="lastname">Last Name
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control"
+                    id="lastname"
+                    type="text"
+                    placeholder="Last Name (optional)"
+                    formControlName="lname" 
+                    />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label"
+                for="username">*User Name
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control"
+                    id="username"
+                    type="text"
+                    placeholder="User Name"
+                    formControlName="uname" 
+                    />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label"
+                for="Device">*Device
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control"
+                    id="Device"
+                    type="text"
+                    placeholder="Device type"
+                    formControlName="devicetype" 
+                    />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label"
+                for="Email">Email
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control"
+                    id="Email"
+                    type="text"
+                    placeholder="User email"
+                    formControlName="umail" 
+                    />
+        </div>
+      </div>
+      <div class="form-group row">
+          <div class="col-sm-1">
+            <button class="btn btn-primary"
+                    style='width:80px'
+                    type="submit">
+              Save
+            </button>
+          </div>
+          <div class="col-sm-1">
+            <button class="btn btn-outline-secondary"
+                    style='width:80px'
+                    type="button">
+              Cancel
+            </button>
+          </div>
+          <div class="col-sm-1">
+            <button class="btn btn-outline-danger"
+                    style='width:80px'
+                    type="button">
+              Delete
+            </button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
+<!-- [ngClass]="{'is-invalid': displayMessage.productCode}" /> -->
