@@ -13,14 +13,14 @@ export class ProfileComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
   
-    this.validationMessages = {
-      uname: {
-        required: 'Please enter a valid username.'
-      },
-      devicetype: {
-        required: 'Please select your device.'
-      }
-    };
+    // this.validationMessages = {
+    //   uname: {
+    //     required: 'Please enter a valid username.'
+    //   },
+    //   devicetype: {
+    //     required: 'Please select your device.'
+    //   }
+    // };
   }
 
   ngOnInit():void{
