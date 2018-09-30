@@ -21,8 +21,6 @@ export class PlayerComponent implements OnInit {
       error => this.errorMessage = <any>error
       
     );
-    console.log(this.player);
-    console.log(this.errorMessage);
   }
 
 }

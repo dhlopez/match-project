@@ -5,67 +5,39 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Player } from './player';
 
-
-
-
- const params = new HttpParams()
-   .append('userid', 'dhelaman@hotmail.com')
-   .append('window', 'alltime')
-   .append('platform', 'xb1')
-
-
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class PlayerService {
-  private playersUrl = 'https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats';
-  
-  headers = new HttpHeaders().set('Authorization', 'ff05e69e525b6bfbbf414dba3d4f57f9');
-  
-  form = new FormData().append('userid', 'dhelaman@hotmail.com')//.append('platform', 'xb1').append('window', 'alltime');
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'ff05e69e525b6bfbbf414dba3d4f57f9',
-      'async':'true',
-      'crossDomain':'true',
-      'method':'POST',
-      'processData': 'false',
-      'contentType': 'false',
-      'mimeType': 'multipart/form-data'
-    })
-  };
-
-  settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats",
-    "method": "POST",
-    "headers": {
-      "Authorization": "ff05e69e525b6bfbbf414dba3d4f57f9"
-    },
-    "processData": false,
-    "contentType": false,
-    "mimeType": "multipart/form-data",
-    "data": this.form
-  }
 
   constructor(private http: HttpClient) { }
 
+ // private playersUrl = 'https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats';
+  private playersUrl =   "https://fortnite-public-api.theapinetwork.com/prod09/users/id";
+
   getPlayer(acct: string): Observable<Player> {
-    // if (acct) {
-    //   return of(this.initializeProduct());
-    // }
-    //const url = `${this.playersUrl}/${acct}`;
-    return this.http.get<Player>(this.playersUrl, this.settings)
+    /* 
+    if (acct) {
+      return of(this.initializeProduct());
+    }
+    const url = `${this.playersUrl}/${acct}`;
+    */
+    let params = new HttpParams().set('username','dhelaman@hotmail.com');
+
+    return this.http.post<Player>(this.playersUrl,
+      {'body':{}},
+      {headers:{'Authorization': 'ff05e69e525b6bfbbf414dba3d4f57f9'},
+      params})
       .pipe(
-        tap(data => console.log('getPlayer: ' + JSON.stringify(data))),
-        catchError(this.handleError)
-      );
+      tap(data => console.log('getPlayer: ' + JSON.stringify(data)),
+      catchError(this.handleError)
+      ));
+    // .subscribe((data: Player) => {
+    //     this.localvar = data;
   }
+
   private handleError(err) {
     // in a real world app, we may send the server to some remote logging infrastructure
     // instead of just logging it to the console
