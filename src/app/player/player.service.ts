@@ -14,28 +14,44 @@ export class PlayerService {
 
   constructor(private http: HttpClient) { }
 
- // private playersUrl = 'https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats';
-  private playersUrl =   "https://fortnite-public-api.theapinetwork.com/prod09/users/id";
+  private playersUrl = "https://fortnite-public-api.theapinetwork.com/prod09/users/id";
+  private playerStatsUrl = "https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats";
 
   getPlayer(acct: string): Observable<Player> {
-    /* 
-    if (acct) {
+    if (!acct) {
       return of(this.initializeProduct());
     }
-    const url = `${this.playersUrl}/${acct}`;
-    */
-    let params = new HttpParams().set('username','dhelaman@hotmail.com');
+    let params1 = new HttpParams().set('username','erasmo');
 
     return this.http.post<Player>(this.playersUrl,
       {'body':{}},
       {headers:{'Authorization': 'ff05e69e525b6bfbbf414dba3d4f57f9'},
-      params})
+      params:params1})
       .pipe(
       tap(data => console.log('getPlayer: ' + JSON.stringify(data)),
       catchError(this.handleError)
       ));
     // .subscribe((data: Player) => {
     //     this.localvar = data;
+  }
+
+  getPlayerStats(acct: string): Observable<Player> { 
+    if (!acct) {
+      return of(this.initializeProduct());
+    }
+    let params2 = new HttpParams().set('user_id','6f1010ec07b44ba4b0557829cbc22b37').set('platform', 'pc').set('window','alltime');
+    // let params2 = new HttpParams().set('username','ninja').set('platform', 'pc').set('window','alltime');
+    // let params2 = new HttpParams().append('user_id','ninja').append('platform', 'pc').append('window','alltime');
+     //let params2 = new HttpParams().append('username','ninja').append('platform', 'pc').append('window','alltime');
+
+    return this.http.post<Player>(this.playerStatsUrl,
+      {body:{}},
+      {headers:{'Authorization': 'ff05e69e525b6bfbbf414dba3d4f57f9'},
+      params:params2})
+      .pipe(
+      tap(data => console.log('getPlayer: ' + JSON.stringify(data)),
+      catchError(this.handleError)
+      ));
   }
 
   private handleError(err) {
