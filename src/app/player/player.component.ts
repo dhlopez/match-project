@@ -29,4 +29,12 @@ export class PlayerComponent implements OnInit {
     );
   }
 
+  showPlayer()
+  {
+    console.info(this.player);
+    //if error is defined, it means the retrieve failed
+    //then handle the error
+    console.info(this.playerStats['error']);
+  }
+
 }
