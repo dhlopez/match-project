@@ -40,9 +40,6 @@ export class PlayerService {
       return of(this.initializeProduct());
     }
     let params2 = new HttpParams().set('user_id','6f1010ec07b44ba4b0557829cbc22b37').set('platform', 'pc').set('window','alltime');
-    // let params2 = new HttpParams().set('username','ninja').set('platform', 'pc').set('window','alltime');
-    // let params2 = new HttpParams().append('user_id','ninja').append('platform', 'pc').append('window','alltime');
-     //let params2 = new HttpParams().append('username','ninja').append('platform', 'pc').append('window','alltime');
 
     return this.http.post<Player>(this.playerStatsUrl,
       {body:{}},

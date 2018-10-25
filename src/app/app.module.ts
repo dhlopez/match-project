@@ -10,6 +10,7 @@ import { ProfileModule } from './profile/profile.module';
 import { ProfileComponent } from './profile/profile.component';
 import { PlayerComponent } from './player/player.component';
 import { PlayerModule } from './player/player.module';
+import { DemoMaterialModule } from './/material-module.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PlayerModule } from './player/player.module';
       },*/
     ]),
     PlayerModule,
-    HttpClientModule
+    HttpClientModule,
+    DemoMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
