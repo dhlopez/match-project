@@ -16,12 +16,13 @@ export class PlayerService {
 
   private playersUrl = "https://fortnite-public-api.theapinetwork.com/prod09/users/id";
   private playerStatsUrl = "https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats";
+  private userid = '';
 
   getPlayer(acct: string): Observable<Player> {
     if (!acct) {
       return of(this.initializeProduct());
     }
-    let params1 = new HttpParams().set('username','erasmo');
+    let params1 = new HttpParams().set('username',acct);
 
     return this.http.post<Player>(this.playersUrl,
       {'body':{}},
@@ -35,18 +36,20 @@ export class PlayerService {
     //     this.localvar = data;
   }
 
-  getPlayerStats(acct: string): Observable<Player> { 
-    if (!acct) {
+  getPlayerStats(uid: string): Observable<Player> { 
+    if (!uid) {
       return of(this.initializeProduct());
     }
-    let params2 = new HttpParams().set('user_id','6f1010ec07b44ba4b0557829cbc22b37').set('platform', 'pc').set('window','alltime');
+    let params2 = new HttpParams()
+    .set('user_id',uid)
+    .set('platform', 'pc').set('window','alltime');
 
     return this.http.post<Player>(this.playerStatsUrl,
       {body:{}},
       {headers:{'Authorization': 'ff05e69e525b6bfbbf414dba3d4f57f9'},
       params:params2})
       .pipe(
-      tap(data => console.log('getPlayer: ' + JSON.stringify(data)),
+      tap(data => console.log('getPlayerStats: ' + JSON.stringify(data)),
       catchError(this.handleError)
       ));
   }

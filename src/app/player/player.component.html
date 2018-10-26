@@ -1,10 +1,10 @@
 <div class='card'>
-  <div class='card-header'>
-    Status from user {{playerStats}}
+  <div class='card-header' *ngIf="playerStats">
+    Status for user {{playerStats.username}}
   </div>
   <div class='card-body'>
     <form novalidate autocomplete="off"
-      (ngSubmit)="saveProduct()"
+      (ngSubmit)="getPlayerStats()"
         [formGroup]="playerForm">
       <div class='form-group row'>
         <label class='col-md-3' for="usernameid">
@@ -32,23 +32,16 @@
           </mat-select>
         </mat-form-field>
       <!-- </div> -->
-      
-      <!-- <div class='row'>
-        <div class='col-md-3'>Console:</div>
-        <div class='col-md-6'><input type='text'
-            [(ngModel)]='player.platform' /></div>
-      </div>
-      <div class='row'>
-        <button class='btn btn-primary'
-          (click)='showPlayer()'>
-        </button>
-      </div>
-      <div class='row'
-        *ngIf='playerStats["error"]'>
-        <div class='col-md-6'>
-            "Dave"
+      <div class='form-group row'>
+        <div class="col-md-1">
+          <button class="btn btn-primary"
+                  style='width:80px'
+                  type="button"
+                  (click)="getPlayerStats()">
+            Send
+          </button>
         </div>
-      </div> -->
+      </div>
     </form>
   </div>
 </div>

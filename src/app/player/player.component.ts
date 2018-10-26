@@ -42,20 +42,7 @@ export class PlayerComponent implements OnInit {
         Validators.maxLength(50)]]
     });
     
-    this.playerService.getPlayer('erasmo').subscribe(
-      player =>{
-        this.player = player;
-      },
-      error => this.errorMessage = <any>error
-    );
-    this.playerService.getPlayerStats('erasmo').subscribe(
-      playerStats =>{
-        this.playerStats = playerStats;
-      },
-      error => this.errorMessage = <any>error
-    );
-    
-    
+    this.getPlayerCall('erasmo');    
   }
   
   //getters are called right away and linked to the form group with the same name
@@ -68,6 +55,21 @@ export class PlayerComponent implements OnInit {
     //if error is defined, it means the retrieve failed
     //then handle the error
     console.info(this.playerStats['error']);
+  }
+
+  getPlayerCall(username:string):void{   
+    this.playerService.getPlayer(username).subscribe(
+      player =>{
+        this.player = player;
+          this.playerService.getPlayerStats(this.player.uid).subscribe(
+            playerStats =>{
+              this.playerStats = playerStats;
+              },
+              error => this.errorMessage = <any>error
+          );
+        },
+        error => this.errorMessage = <any>error
+    );
   }
 
 }
