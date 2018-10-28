@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Player } from './player';
+import { StringifyOptions } from 'querystring';
 
 @Injectable({
   providedIn: 'root'
@@ -36,13 +37,14 @@ export class PlayerService {
     //     this.localvar = data;
   }
 
-  getPlayerStats(uid: string): Observable<Player> { 
+  getPlayerStats(uid: string, platform:string): Observable<Player> { 
     if (!uid) {
       return of(this.initializeProduct());
     }
     let params2 = new HttpParams()
     .set('user_id',uid)
-    .set('platform', 'pc').set('window','alltime');
+    .set('platform', platform)
+    .set('window','alltime');
 
     return this.http.post<Player>(this.playerStatsUrl,
       {body:{}},

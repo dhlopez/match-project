@@ -20,6 +20,7 @@ export class PlayerComponent implements OnInit {
   playerStats:Player | undefined;
   errorMessage = '';
   playerForm: FormGroup;
+  selectedPlatform:string;
 
   platforms: Platform[] = [
     {value: 'pc', viewValue: 'PC'},
@@ -42,12 +43,12 @@ export class PlayerComponent implements OnInit {
         Validators.maxLength(50)]]
     });
     
-    this.getPlayerCall('erasmo');    
+    //this.getPlayerCall();    
   }
   
   //getters are called right away and linked to the form group with the same name
   get username() { return this.playerForm.get('username'); }
-  //get password() { return this.playerForm.get('password'); }
+  
 
   showPlayer()
   {
@@ -57,11 +58,11 @@ export class PlayerComponent implements OnInit {
     console.info(this.playerStats['error']);
   }
 
-  getPlayerCall(username:string):void{   
-    this.playerService.getPlayer(username).subscribe(
+  getPlayerCall():void{   
+    this.playerService.getPlayer(this.playerForm.controls.username.value).subscribe(
       player =>{
         this.player = player;
-          this.playerService.getPlayerStats(this.player.uid).subscribe(
+          this.playerService.getPlayerStats(this.player.uid, this.selectedPlatform).subscribe(
             playerStats =>{
               this.playerStats = playerStats;
               },
